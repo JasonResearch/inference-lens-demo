@@ -64,7 +64,7 @@ def build_truth_galaxy(cfg: dict, seed: int = 1) -> dict:
     # Normalize Sigma so that total mass integrates to Mb_total:
     # Mb_total = ∫ 2π r Sigma(r) dr
     integrand = 2.0 * np.pi * r * Sigma_shape
-    norm = np.trapz(integrand, r)
+    norm = np.trapezoid(integrand, r)
     Sigma = Sigma_shape * (Mb_total / norm)  # Msun/kpc^2
 
     # Enclosed mass M(<r) = ∫_0^r 2π r' Sigma(r') dr'
