@@ -15,11 +15,15 @@ It demonstrates an **existence proof**: inference and normalization choices can 
 
 ## What this produces
 
-A single run generates:
+Two inference pipelines applied to the same baryon-only galaxy can differ in observable extent and inferred structure without any change to the underlying mass distribution.
+
+A single run produces:
+
 - A 3-panel figure:
   1) Truth rotation curve vs inferred curves (Lens A and Lens B)
   2) Observed surface-brightness profiles / truncation behavior (how information is lost)
   3) Discrepancy proxy comparison (e.g., log10(J3) or Mdyn/Mb proxy)
+
 - A CSV summary of inferred parameters and mismatch metrics for A and B
 
 ## Quickstart
