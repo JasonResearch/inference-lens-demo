@@ -13,6 +13,20 @@ The goal is demonstrative:
 This does **not** claim dark matter is "just optics."
 It demonstrates an **existence proof**: inference and normalization choices can manufacture a discrepancy signal.
 
+## Related Zenodo Records
+
+This demonstration is a reproducible illustration of inference effects
+developed and tested in the following archived research:
+
+- Observer-Normalized Scale Relativity: A Coherence Constraint on Global Physical Inference (core framework):  
+  https://doi.org/10.5281/zenodo.18356675
+
+- Stress testing across the SPARC galaxy database:  
+  https://doi.org/10.5281/zenodo.18294837
+
+- Predictive results in the dwarf-galaxy regime:  
+  https://doi.org/10.5281/zenodo.18308519
+
 ## What this produces
 
 Two inference pipelines applied to the same baryon-only galaxy can differ in observable extent and inferred structure without any change to the underlying mass distribution.
