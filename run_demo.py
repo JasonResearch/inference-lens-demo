@@ -18,7 +18,7 @@ def load_lens(path: str) -> dict:
         return json.load(f)
 
 
-def summarize(label: str, inferred: dict):
+def summarize(label: str, inferred: dict, truth: dict):
     r = inferred["r_kpc"]
     V = inferred["Vobs_kms"]
 
@@ -26,9 +26,12 @@ def summarize(label: str, inferred: dict):
         print(f"{label}: no observable data")
         return
 
+    frac = len(r) / len(truth["r_kpc"])
+
     print(f"{label}:")
     print(f"  Observable extent  = {r.max():.2f} kpc")
     print(f"  Points observed    = {len(r)}")
+    print(f"  Fraction of truth observed = {frac:.2f}")
     print(f"  Peak inferred V    = {V.max():.1f} km/s")
 
 
@@ -42,8 +45,8 @@ def main():
     inferred_B = apply_inference_lens(truth, lens_B, seed=1)
 
     print("=== Inference Lens Comparison (same truth) ===")
-    summarize("Lens A (deep / sharp)", inferred_A)
-    summarize("Lens B (shallow / blurry)", inferred_B)
+    summarize("Lens A (deep / sharp)", inferred_A, truth)
+    summarize("Lens B (shallow / blurry)", inferred_B, truth)
 
 
 if __name__ == "__main__":
