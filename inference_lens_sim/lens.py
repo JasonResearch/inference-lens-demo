@@ -28,21 +28,24 @@ def apply_inference_lens(truth: dict, lens_cfg: dict, seed: int = 1) -> dict:
     -------
     dict with inferred observables
     """
-    rng = np.random.default_rng(seed)
+    _rng = np.random.default_rng(seed)  # reserved for future noise effects
 
     r = truth["r_kpc"]
     Sigma = truth["Sigma_b"]
     Vtrue = truth["Vtrue_kms"]
 
-    # Surface-brightness limit (acts like information cutoff)
-    sb_limit = lens_cfg["sb_limit_mag_arcsec2"]
+    # Surface-brightness limit (mag/arcsec^2)
+    sb_limit = float(lens_cfg["sb_limit_mag_arcsec2"])
 
-    # Convert surface density to a proxy surface brightness
-    # (higher Sigma = brighter)
-    SB_proxy = -2.5 * np.log10(Sigma / Sigma.max())
+    # Anchor the central (brightest) surface brightness to a realistic value.
+    # This makes sb_limit values like 24 vs 28.5 meaningful.
+    sb0 = float(lens_cfg.get("sb0_mag_arcsec2", 20.0))  # central SB (mag/arcsec^2)
 
-    # Observability mask
-    observed = SB_proxy <= sb_limit
+    # Magnitude-like profile: larger number = fainter
+    SB_mag = sb0 - 2.5 * np.log10(Sigma / Sigma.max())
+
+    # Observable where brighter than the limit
+    observed = SB_mag <= sb_limit
 
     # Inferred rotation curve: only where observable
     r_obs = r[observed]
@@ -52,3 +55,5 @@ def apply_inference_lens(truth: dict, lens_cfg: dict, seed: int = 1) -> dict:
         "r_kpc": r_obs,
         "Vobs_kms": V_obs,
         "observed_mask": observed,
+        "sb_mag": SB_mag,
+    }
