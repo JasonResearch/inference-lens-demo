@@ -1,0 +1,10 @@
+{
+  "name": "LensB_ShallowBlurry",
+  "sb_limit_mag_arcsec2": 24.0,
+  "psf_sigma_arcsec": 2.5,
+  "pixel_scale_arcsec": 1.0,
+  "beam_smear_strength": 0.25,
+  "noise_sigma": 0.03,
+  "inclination_deg": 60.0,
+  "distance_mpc": 10.0
+}
